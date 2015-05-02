@@ -54,4 +54,9 @@ let g:airline#extensions#tabline#enabled = 1 "show tabs
 set nobackup
 set noswapfile
 
+" make command access easy
 nnoremap ; :
+
+" pagedown with space
+nnoremap <SPACE> <PAGEDOWN>
+nnoremap <SHIFT><SPACE> <PAGEUP>
