@@ -8,12 +8,12 @@ call vundle#begin()
 " Plugin 'klen/python-mode'
 " Plugin 'marijnh/tern_for_vim'
 " Plugin 'pangloss/vim-javascript'
-Plugin 'Quramy/tsuquyomi'
+" Plugin 'Quramy/tsuquyomi'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
-Plugin 'burnettk/vim-angular'
+" Plugin 'burnettk/vim-angular'
 Plugin 'einars/js-beautify'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
@@ -21,17 +21,17 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'kien/ctrlp.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'mhinz/vim-startify'
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'maksimr/vim-jsbeautify'
+" Plugin 'marijnh/tern_for_vim'
+" Plugin 'mhinz/vim-startify'
 Plugin 'moll/vim-node'
-Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-obsession'
+" Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 
@@ -42,7 +42,7 @@ filetype plugin indent on
 
 syntax enable
 set background=dark
-colorscheme molokai
+colorscheme Tomorrow-Night-Eighties
 
 set expandtab
 set smarttab
@@ -72,7 +72,8 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>n <C-^>
 nnoremap <Leader>h :bp<CR>
 nnoremap <Leader>l :bn<CR>
-nnoremap <Leader>s :bd<CR>
+nnoremap <Leader>x :bd<CR>
+nnoremap <Leader>e :Lexplore<CR>
 
 " make command access easy
 nnoremap ; :
@@ -94,6 +95,10 @@ else
         \ }
 endif
 
+" netrw Default to tree mode
+let g:netrw_liststyle = 3
+
+
 " configure Airline
 let g:airline#extensions#tabline#enabled = 1 "show tabs
 
@@ -107,7 +112,8 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
+" youcompleteme error
+let g:ycm_cache_omnifunc = 0
 " no need to save backup or swap file
 set nobackup
 set noswapfile
