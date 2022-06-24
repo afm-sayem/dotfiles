@@ -1,8 +1,18 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/sayem/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="lambda"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -11,48 +21,17 @@ ZSH_THEME="lambda"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git nvm)
-
-# User configuration
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# User configuration
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$HOME/.npm-global/bin:$HOME/.n/bin:$PATH"
+export N_PREFIX="$HOME/.n"
 alias vi="vim"
+alias vi="nvim"
+alias rustdoc="rustup doc --toolchain=stable-x86_64-apple-darwin"
 
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-
-## AWS SETTINGS
-
-## Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-## vim keybindings in bash
-set -o vi
 bindkey "^R" history-incremental-search-backward
-
-## VirtualEnvwrapper
-source virtualenvwrapper.sh
-
-## POSTGRES environment variable
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
-
-export NVM_DIR="/Users/sayem/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-## rabbitmq script path
-export PATH=$PATH:/usr/local/sbin 
 
 ## fancy ctrl-z http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 fancy-ctrl-z () {
@@ -67,4 +46,5 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-## set terminal title http://superuser.com/questions/419775/with-bash-iterm2-how-to-name-tabs
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
