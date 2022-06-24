@@ -1,48 +1,33 @@
 " Required:
-set runtimepath+=/Users/sayemafm/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin('~/.vim/plugged')
 
-" Required:
-if dein#load_state('/Users/sayemafm/.cache/dein')
-  call dein#begin('/Users/sayemafm/.cache/dein')
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'navarasu/onedark.nvim'
+Plug 'kien/ctrlp.vim'
+Plug 'mhinz/vim-startify'
+Plug 'rking/ag.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'dense-analysis/ale'
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'neoclide/coc.nvim', {'merged':0, 'rev': 'release'}
+Plug 'honza/vim-snippets'
+Plug 'ellisonleao/glow.nvim'
+Plug 'lepture/vim-jinja'
+call plug#end()
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/Users/sayemafm/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  call dein#add('HerringtonDarkholme/yats.vim')
-  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
-
-  " Add or remove your plugins here like this:
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('jeetsukumaran/vim-buffergator')
-  call dein#add('kien/ctrlp.vim')
-  call dein#add('martinda/Jenkinsfile-vim-syntax')
-  call dein#add('posva/vim-vue')
-  call dein#add('rking/ag.vim')
-  call dein#add('ssoriche/perltidy.vim')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-unimpaired')
-  call dein#add('tpope/vim-sensible')
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-perl/vim-perl')
-  call dein#add('vim-scripts/taglist.vim')
-  call dein#add('w0rp/ale')
-  " call dein#add('SirVer/ultisnips')
-  call dein#add('ludovicchabant/vim-gutentags')
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
+" Requiredd
 filetype plugin indent on
 syntax enable
+colorscheme onedark
 set nocompatible
 
 set expandtab
@@ -75,8 +60,9 @@ nnoremap <Leader>n <C-^>
 nnoremap <Leader>h :bp<CR>
 nnoremap <Leader>l :bn<CR>
 nnoremap <Leader>x :bd<CR>
-nnoremap <Leader>e :Lexplore<CR>
-nnoremap <Leader>r :terminal perl %<CR>
+nnoremap <Leader>e :NvimTreeToggle<CR>
+nnoremap <Leader>rp :terminal perl %<CR>
+nnoremap <Leader>rp :terminal go %<CR>
 nnoremap <Leader>q" ciw""<Esc>P
 nnoremap <Leader>q' ciw''<Esc>P
 nnoremap <Leader>tt :TlistToggle<CR>
@@ -87,7 +73,7 @@ au Filetype perl vmap = :PerlTidy<CR>
 
 " make command access easy
 nnoremap ; :
-inoremap jj <esc>
+" inoremap jj <esc>
 
 " configure CtrlP
 let g:ctrlp_use_caching = 0
@@ -112,25 +98,31 @@ let g:netrw_winsize=30
 " neosnippet
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-s>     <Plug>(neosnippet_expand_or_jump)
-smap <C-s>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-s>     <Plug>(neosnippet_expand_target)
+" imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-s>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-s>     <Plug>(neosnippet_expand_target)
 " <TAB>: completion.
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
-\ pumvisible() ? "\<C-s>" :
-\ neosnippet#expandable_or_jumpable() ?
-\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
+" imap <expr><TAB>
+" \ pumvisible() ? "\<C-s>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+" Ale next error
+nmap <silent> <leader>an :ALENext<cr>
+nmap <silent> <leader>ap :ALEPrevious<cr>
+let g:ale_fixers = ['prettier', 'eslint', 'pg_format']
+let g:ale_fix_on_save = 1
 
 " turn off tag suggestions in deoplete 
 " let g:deoplete#ignore_sources = get(g:,'deoplete#ignore_sources',{})
@@ -143,7 +135,7 @@ let g:ftplugin_sql_omni_key = '<C-j>'
 let g:airline#extensions#tabline#enabled = 1 "show tabs
 
 " enable deoplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " enable matchit
 " let loaded_matchit = 1
@@ -161,11 +153,88 @@ autocmd CompleteDone * pclose
 
 " sync vue
 autocmd FileType vue syntax sync fromstart
+" sql autoformat
+au FileType sql setl formatprg=/usr/local/bin/pg_format\ -
 
 " no visual bell
 set visualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
+"
+" " Coc
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! CurrentLineInfo()
+lua << EOF
+local linenr = vim.api.nvim_win_get_cursor(0)[1]
+local curline = vim.api.nvim_buf_get_lines(
+        0, linenr - 1, linenr, false)[1]
+print(string.format("Current line [%d] has %d bytes",
+        linenr, #curline))
+EOF
+endfunction
+
+function! TreeSetup()
+lua << EOF
+require('nvim-tree').setup {
+  open_on_setup = true,
+  update_cwd = true,
+  respect_buf_cwd = true,
+  hijack_netrw = true,
+  git = {
+    ignore = true,
+
+    },
+  renderer = {
+    indent_markers = {
+      enable = true
+    },
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true 
+      }
+    },
+    highlight_git = true,
+    highlight_opened_files = '1'
+  },
+  actions = {
+    open_file = {
+      quit_on_open = false,
+      window_picker = {
+        enable = false
+      }
+    }
+  },
+  view = {
+    width = 32,
+    auto_resize = true
+  },
+  filters = {
+    dotfiles = true,
+    custom = { '.git', 'node_modules', '.cache', '.bin' },
+  },
+  git = {
+    enable = true,
+    ignore = true,
+  },
+}
+EOF
+endfunction
+
+call TreeSetup()
+
+let g:coc_snippet_next = '<tab>'
 
 " gutentags
 if executable('rg')
