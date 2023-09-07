@@ -13,7 +13,7 @@ export LC_ALL=en_US.UTF-8
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/afmsayem/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -64,14 +64,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # POSTGRESAPP
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/13/bin
 ### Codex CLI setup - start
-export CODEX_CLI_PATH=/Users/afmsayem/.oh-my-zsh/custom/plugins/codex-cli
+export CODEX_CLI_PATH=$HOME/.oh-my-zsh/custom/plugins/codex-cli
 source "$CODEX_CLI_PATH/scripts/zsh_plugin.zsh"
 bindkey '^G' create_completion
 ### Codex CLI setup - end
 
-# bun completions
-[ -s "/Users/afmsayem/.bun/_bun" ] && source "/Users/afmsayem/.bun/_bun"
-
 # deno
-export DENO_INSTALL="/Users/afmsayem/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
