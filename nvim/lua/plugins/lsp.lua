@@ -54,7 +54,7 @@ return {
 			},
 			servers = {
 				["denols"] = { "typescript" },
-				["null-ls"] = { "javascript", "lua", "css", "sql", "vue" },
+				["null-ls"] = { "javascript", "lua", "css", "sql", "vue", "html" },
 				["perlnavigator"] = { "perl" },
 			},
 		})
