@@ -70,9 +70,10 @@ return {
 
 		local cmp = require("cmp")
 		local cmp_action = require("lsp-zero").cmp_action()
-		local luasnip = require("luasnip")
 
+		local luasnip = require("luasnip")
 		require("luasnip.loaders.from_vscode").lazy_load()
+
 		local function has_words_before()
 			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -99,6 +100,8 @@ return {
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
 					elseif luasnip.expandable() then
 						luasnip.expand()
+					elseif luasnip.locally_jumpable(1) then
+						luasnip.jump(1)
 					elseif has_words_before() then
 						cmp.complete()
 					else
