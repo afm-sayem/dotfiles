@@ -34,6 +34,7 @@ return {
 			-- see :help lsp-zero-keybindings
 			-- to learn the available actions
 			lsp.default_keymaps({ buffer = bufnr })
+			lsp.buffer_autoformat()
 		end)
 
 		require("lspconfig").perlnavigator.setup({
@@ -47,18 +48,6 @@ return {
 			},
 		})
 
-		lsp.format_on_save({
-			format_opts = {
-				async = false,
-				timeout_ms = 10000,
-			},
-			servers = {
-				["denols"] = { "typescript" },
-				["null-ls"] = { "javascript", "lua", "css", "sql", "vue", "html" },
-				["perlnavigator"] = { "perl" },
-			},
-		})
-
 		lsp.setup()
 
 		vim.diagnostic.config({
@@ -69,9 +58,6 @@ return {
 
 		null_ls.setup({
 			sources = {
-				-- Replace these with the tools you have installed
-				-- make sure the source name is supported by null-ls
-				-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 				null_ls.builtins.formatting.prettier,
 				null_ls.builtins.formatting.stylua,
 			},
