@@ -58,4 +58,4 @@ map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", default_opts)
 map("n", "<leader>gg", ":LazyGit<CR>", default_opts) -- open/close
 
 -- trouble
-map("n", "<leader>t", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+map("n", "<leader>t", "<cmd>Trouble diagnostics<cr>", { silent = true, noremap = true })

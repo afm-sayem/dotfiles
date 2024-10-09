@@ -24,7 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git nvm taskwarrior)
+plugins=(git nvm taskwarrior direnv)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -55,20 +55,28 @@ bindkey '^Z' fancy-ctrl-z
 
 # ASDF
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
-. ~/.asdf/plugins/java/set-java-home.zsh
+# . ~/.asdf/plugins/java/set-java-home.zsh
 
 # ANDROID HOME
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+# export ANDROID_HOME=$HOME/Library/Android/sdk
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # POSTGRESAPP
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/13/bin
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/16/bin
 ### Codex CLI setup - start
-export CODEX_CLI_PATH=$HOME/.oh-my-zsh/custom/plugins/codex-cli
-source "$CODEX_CLI_PATH/scripts/zsh_plugin.zsh"
+# export CODEX_CLI_PATH=$HOME/.oh-my-zsh/custom/plugins/codex-cli
+# source "$CODEX_CLI_PATH/scripts/zsh_plugin.zsh"
 bindkey '^G' create_completion
 ### Codex CLI setup - end
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# perl
+if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
+
+# go
+export GOPATH=$(asdf where golang)/packages
+export GOROOT=$(asdf where golang)/go
+export PATH="${PATH}:$(go env GOPATH)/bin"
